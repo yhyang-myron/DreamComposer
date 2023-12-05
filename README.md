@@ -13,6 +13,6 @@ Abstract: *Utilizing pre-trained 2D large-scale generative models, recent works 
 
 ![](assets/teaser.png)
 
-## Method Review
+## Method Overview
 ![](assets/pipeline.png)
 
