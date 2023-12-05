@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DreamComposer: Controllable 3D Object Generation via Multi-View Conditions</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="./assets/logo.png">
+    <!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,800italic,400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/project.css" media="screen" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/iconize.css" />
+    <script src="js/google-code-prettify/prettify.js"></script> -->
+  </head>
+
+  <!-- cover -->
+  <section>
+    <div class="jumbotron text-center mt-0">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2>DreamComposer: Controllable 3D Object Generation<br>via Multi-View Conditions
+            </h2>
+            <h4 style="color:#5a6268;">Arxiv 2023 </h4>
+            <hr>
+            <h6>
+                <a href="https://github.com/yhyang-myron" target="_blank">Yunhan Yang</a><sup>1*</sup>,
+                <a href="https://scholar.google.com/citations?user=lHb5gzoAAAAJ" target="_blank">Yukun Huang</a><sup>1*</sup>,
+                <a href="https://xywu.me" target="_blank">Xiaoyang Wu</a><sup>1</sup>,
+                <a href="https://github.com/bennyguo" target="_blank">Yuan-Chen Guo</a><sup>3,4</sup>,
+                <a href="https://scholar.google.com/citations?user=AWtV-EQAAAAJ" target="_blank">Song-Hai Zhang</a><sup>4</sup>,
+                <a href="https://hszhao.github.io" target="_blank">Hengshuang Zhao</a><sup>1</sup>,
+                <a href="https://tonghe90.github.io" target="_blank">Tong He</a><sup>2</sup>,
+                <a href="https://xh-liu.github.io" target="_blank">Xihui Liu</a><sup>1</sup>
+            </h6>
+            <p>
+                <sup>*</sup>Equal Contribution &nbsp;&nbsp;
+                <sup>1</sup>The University of Hong Kong &nbsp;&nbsp;
+                <sup>2</sup>Shanghai AI Laboratory&nbsp;&nbsp;&nbsp;&nbsp;
+                <sup>3</sup>VAST&nbsp;&nbsp;&nbsp;&nbsp;
+                <sup>4</sup>Tsinghua University
+            </p>
+
+            <div class="row justify-content-center">
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
+                    <i class="fa fa-file"></i> Paper</a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="https://github.com/yhyang-myron/DreamComposer" role="button"  target="_blank">
+                    <i class="fa fa-github-alt"></i> Code (Coming Soon) </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
+                    <i class="fa fa-database"></i> Model </a> </p>
+              </div>
+              <div class="column">
+                  <p class="mb-5"><a class="btn btn-large btn-light" href="" role="button"  target="_blank">
+                    <i class="fa fa-desktop"></i> Live Demo </a> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- abstract -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h3>Abstract</h3>
+          <hr style="margin-top:0px">
+          <h6 style="color:#6a767f"> We present DreamComposer, a flexible and scalable framework that can enhance existing view-aware diffusion models by injecting multi-view conditions. </h6>
+          <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+            <source src="assets/teaser.mp4" type="video/mp4">
+          </video>
+          <br>
+          <p class="text-justify">
+            Utilizing pre-trained 2D large-scale generative models, recent works are capable of generating high-quality novel views from a single in-the-wild image. However, due to the lack of information from multiple views, these works encounter difficulties in generating controllable novel views. In this paper, we present DreamComposer, a flexible and scalable framework that can enhance existing view-aware diffusion models by injecting multi-view conditions. Specifically, DreamComposer first uses a view-aware 3D lifting module to obtain 3D representations of an object from multiple views. Then, it renders the latent features of the target view from 3D representations with the multi-view feature fusion module. Finally the target view features extracted from multi-view inputs are injected into a pre-trained diffusion model. Experiments show that DreamComposer is compatible with state-of-the-art diffusion models for zero-shot novel view synthesis, further enhancing them to generate high-fidelity novel view images with multi-view conditions, ready for controllable 3D object reconstruction and various other applications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Video -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Demo Video</h2>
+            <hr style="margin-top:0px">
+            <video width="90%" controls>
+                <source src="assets/demo.mp4" type="video/mp4">
+            </video>
+          <p class="text-left">
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Method -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2>Method</h2>
+          <hr style="margin-top:0px">
+          <img src="assets/pipeline.png" width="80%">
+          <p class="text-justify">
+            Given multiple input images from different views, DreamComposer extracts their 2D latent features and uses a 3D lifting module to produce tri-plane 3D representations. Then, the multi-view condition rendered from 3D representations is injected into the pre-trained diffusion model to provide target-view auxiliary information.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Exp: Results on GSO -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Results on the Google Scanned Object dataset</h2>
+            <hr style="margin-top:0px">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="assets/results_gso.mp4" type="video/mp4">
+            </video>
+          <p class="text-justify">
+            Qualitative comparison of 3D reconstruction results between SyncDreamer ("SyncD.") and our DC-SyncDreamer ("SyncD. + Ours") on the Google Scanned Object dataset, where the additional back-view input images (marked in <text style="color:#ff0000; font-size: larger;">□</text>) are generated by Zero-1-to-3.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Exp: Results on Objaverse -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Results on the Objaverse dataset</h2>
+            <hr style="margin-top:0px">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="assets/results_obj.mp4" type="video/mp4">
+            </video>
+          <p class="text-center">
+            Qualitative comparison of 3D reconstruction results between SyncDreamer ("SyncD.") and DC-SyncDreamer ("SyncD. + Ours") on the Objaverse dataset.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Exp: Ablation Study -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Ablation Analysis on the Number of Input Views</h2>
+            <hr style="margin-top:0px">
+            <img src="assets/ablation.png" width="80%">
+          <p class="text-center">
+            DreamComposer can handle arbitrary numbers of input views, and its controllability is strengthened with the increasing number of input views.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+    <!-- Application: Editing -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Application: Controllable 3D Editing</h2>
+            <hr style="margin-top:0px">
+            <img src="assets/editing.png" width="80%">
+          <p class="text-center">
+            We present the results of (a) Personalize Editing with InstructPix2Pix; (b) Drag Editing with DragGAN, DragDiffusion; and (c) Color Editing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- Application: Avatar -->
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+            <h2>Application: 3D Character Modeling</h2>
+            <hr style="margin-top:0px">
+            <video width="80%" playsinline="" autoplay="autoplay" loop="loop" preload="" muted="">
+                <source src="assets/character.mp4" type="video/mp4">
+            </video>
+          <p class="text-center">
+            We present the NVS and reconstruction results of complex 3D characters from a few multi-view 2D paintings.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>
+
+  <!-- citing -->
+  <div class="container">
+    <div class="row ">
+      <div class="col-12">
+        <h3>Citation</h3>
+          <hr style="margin-top:0px">
+<pre style="background-color: #e9eeef;padding: 1.25em 1.5em">
+<code>@article{yang2023dreamcomposer,
+    title={DreamComposer: Controllable 3D Object Generation via Multi-View Conditions},
+    author={Yang, Yunhan and Huang, Yukun and Wu, Xiaoyang and Guo, Yuan-Chen and Zhang, Song-Hai and Zhao, Hengshuang and He, Tong and Liu, Xihui},
+    journal={arXiv preprint arXiv:xxxx.xxxxx},
+    year={2023}
+}</code>
+</pre>
+        <hr>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center" style="margin-bottom:10px">
+    This website is constructed with the template from <a href="https://liuyuan-pal.github.io/SyncDreamer/" target="_blank">SyncDreamer</a>.
+  </footer>
+
+</body>
+</html>
