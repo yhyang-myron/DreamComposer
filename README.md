@@ -5,7 +5,7 @@
 <h1 align="center">DreamComposer: Controllable 3D Object Generation via Multi-View Conditions</h1>
 <p align="center">
 
-## [Project Page]() | [Paper]()
+## [Project Page](https://yhyang-myron.github.io/DreamComposer/) | [Paper]()
 
 **Code will come soon.**
 
