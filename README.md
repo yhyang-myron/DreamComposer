@@ -5,7 +5,7 @@
 <h1 align="center">DreamComposer: Controllable 3D Object Generation via Multi-View Conditions</h1>
 <p align="center">
 
-## [Project Page](https://yhyang-myron.github.io/DreamComposer/) | [Paper]()
+## [Project Page](https://yhyang-myron.github.io/DreamComposer/) | [Paper](https://arxiv.org/abs/2312.03611)
 
 **Code will come soon.**
 
@@ -16,3 +16,13 @@ Abstract: *Utilizing pre-trained 2D large-scale generative models, recent works 
 ## Method Overview
 ![](assets/pipeline.png)
 
+## Citation
+If you find _DreamComposer_ useful in your project, please cite our work:
+```
+@article{yang2023dreamcomposer,
+    title={DreamComposer: Controllable 3D Object Generation via Multi-View Conditions},
+    author={Yang, Yunhan and Huang, Yukun and Wu, Xiaoyang and Guo, Yuan-Chen and Zhang, Song-Hai and Zhao, Hengshuang and He, Tong and Liu, Xihui},
+    journal={arXiv preprint arXiv:2312.03611},
+    year={2023}
+}
+```
