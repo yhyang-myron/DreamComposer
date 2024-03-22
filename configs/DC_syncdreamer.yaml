@@ -1,0 +1,99 @@
+model:
+  base_learning_rate: 1.0e-05
+  target: ldm.models.diffusion.DC_sync_dreamer.DCSyncDiffusion
+  params:
+    view_num: 16
+    image_size: 256
+    cfg_scale: 2.0
+    output_num: 8
+    batch_view_num: 4
+    finetune_unet: false
+    finetune_projection: false
+    drop_conditions: false
+    finetune_volume: false
+    recon_loss: true
+    clip_image_encoder_path: ckpt/ViT-L-14.pt
+
+    scheduler_config: # 10000 warmup steps
+      target: ldm.lr_scheduler.LambdaLinearScheduler
+      params:
+        warm_up_steps: [ 100 ]
+        cycle_lengths: [ 100000 ]
+        f_start: [ 0.02 ]
+        f_max: [ 1.0 ]
+        f_min: [ 1.0 ]
+      
+    lift3d_config:
+      target: ldm.modules.diffusionmodules.lift3d.UNetLift3d
+      params:
+        image_size: 32 # unused
+        in_channels: 4
+        out_channels: 96
+        model_channels: 192
+        attention_resolutions: [ 4, 2, 1 ]
+        num_res_blocks: 2
+        channel_mult: [ 1, 2, 4, 4 ]
+        num_heads: 8
+        use_spatial_transformer: False
+        transformer_depth: 1
+        use_checkpoint: True
+        legacy: False
+    
+    control_stage_config:
+      target: ldm.modules.diffusionmodules.cldm.ControlNet
+      params:
+        image_size: 32 # unused
+        in_channels: 8
+        hint_channels: 4
+        model_channels: 320
+        attention_resolutions: [ 4, 2, 1 ]
+        num_res_blocks: 2
+        channel_mult: [ 1, 2, 4, 4 ]
+        num_heads: 8
+        use_spatial_transformer: True
+        transformer_depth: 1
+        context_dim: 768
+        use_checkpoint: True
+        legacy: False
+
+    unet_config:
+      target: ldm.models.diffusion.sync_dreamer_attention.ControlledDepthWiseAttention
+      params:
+        volume_dims: [64, 128, 256, 512]
+        image_size: 32
+        in_channels: 8
+        out_channels: 4
+        model_channels: 320
+        attention_resolutions: [ 4, 2, 1 ]
+        num_res_blocks: 2
+        channel_mult: [ 1, 2, 4, 4 ]
+        num_heads: 8
+        use_spatial_transformer: True
+        transformer_depth: 1
+        context_dim: 768
+        use_checkpoint: True
+        legacy: False
+
+data:
+  target: ldm.data.sync_tri.SyncDreamerDataset
+  params:
+    target_dir: ''  # renderings of target views
+    input_dir: ''  # renderings of input views
+    uid_set_pkl: ''  # a list of uids
+    fix_uid_pkl: ''
+    validation_dir: ''  # directory of validation data
+    batch_size: 48 # batch size for a single gpu
+    num_workers: 16
+
+lightning:
+  modelcheckpoint:
+    params:
+      every_n_train_steps: 2000 # we will save models every 1k steps
+  callbacks:
+    {}
+
+  trainer:
+    benchmark: True
+    # val_check_interval: 5000 # we will run validation every 1k steps, the validation will output images to <log_dir>/<images>/val
+    num_sanity_val_steps: 0
+    check_val_every_n_epoch: 2
