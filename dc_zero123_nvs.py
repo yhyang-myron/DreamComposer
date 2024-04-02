@@ -107,7 +107,7 @@ def prepare_inputs_control(input_path_list, input_azimuth_list, target_azimuth, 
         input_pose_list.append(cond_pose_opengl)
     valid_num = s
 
-    target_pose = spherical_to_Pose_towards_origin(camera_distance, 0.5 * np.pi - np.deg2rad(30), np.deg2rad(target_azimuth))
+    target_pose = spherical_to_Pose_towards_origin(camera_distance, 0.5 * np.pi - np.deg2rad(elevation), np.deg2rad(target_azimuth))
     target_pose_opengl = pose_opencv_to_opengl(target_pose)
     T_list, lam_list = get_T(target_pose_opengl, input_pose_list)
     Ts = torch.stack(T_list, -1)
