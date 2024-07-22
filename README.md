@@ -158,7 +158,7 @@ python dc_syncdreamer_training.py \
 ```
 
 ## Acknowledgement
-DreamComposer is inspirited by the following repos: [zero123](https://github.com/cvlab-columbia/zero123), [SyncDreamer](https://github.com/liuyuan-pal/SyncDreamer), [threestudio](https://github.com/threestudio-project/threestudio), [camtools](https://github.com/yxlao/camtools), [eg3d](https://github.com/NVlabs/eg3d), [ControlNet](https://github.com/lllyasviel/ControlNet), [NeuS](https://github.com/Totoro97/NeuS). 
+DreamComposer is inspired by the following repos: [zero123](https://github.com/cvlab-columbia/zero123), [SyncDreamer](https://github.com/liuyuan-pal/SyncDreamer), [threestudio](https://github.com/threestudio-project/threestudio), [camtools](https://github.com/yxlao/camtools), [eg3d](https://github.com/NVlabs/eg3d), [ControlNet](https://github.com/lllyasviel/ControlNet), [NeuS](https://github.com/Totoro97/NeuS). 
 
 Many thanks to the authors for sharing their codes.
 
